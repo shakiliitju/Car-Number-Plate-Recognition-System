@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Car Number Plate Recognition</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>🚗 Car Number Plate Recognition</h1>
+    <p class="description">Upload an image of a vehicle to automatically detect and recognize the license plate number.</p>
+    
+    <form id="uploadForm">
+      <div class="upload-section">
+        <input type="file" id="imageInput" name="image" accept="image/*" required />
+        <button type="submit" id="submitBtn">🔍 Recognize License Plate</button>
+      </div>
+    </form>
+
+    <div id="preview">
+      <h3>📷 Image Preview:</h3>
+      <img id="previewImage" src="#" alt="Preview" />
+    </div>
+
+    <div id="output">
+      <h3>🔢 Detected License Plate:</h3>
+      <div id="resultContainer">
+        <pre id="resultText">Upload an image to detect the license plate...</pre>
+        <div id="confidence" class="confidence-indicator"></div>
+        <div id="processingInfo" class="processing-info"></div>
+      </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
