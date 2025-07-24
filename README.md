@@ -2,6 +2,23 @@
 
 An **advanced, high-accuracy** image processing system that uses computer vision and OCR (Optical Character Recognition) to automatically detect and recognize vehicle license plates from images with improved accuracy and robustness.
 
+## � Table of Contents
+
+- [Latest Improvements](#-latest-improvements-v20)
+- [Screenshots](#-screenshots)
+- [Quick Demo](#-quick-demo)
+- [Features](#features)
+- [System Architecture](#system-architecture)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technical Details](#technical-details)
+- [Applications](#applications)
+- [Performance Optimization](#performance-optimization)
+- [Troubleshooting](#troubleshooting)
+- [Future Enhancements](#future-enhancements)
+- [Dependencies](#dependencies)
+- [License](#license)
+
 ## 🚀 Latest Improvements (v2.0)
 
 ### Enhanced Detection Accuracy
@@ -22,6 +39,28 @@ An **advanced, high-accuracy** image processing system that uses computer vision
 - **Regional Processing**: Tries center and bottom regions when full detection fails
 - **Error Handling**: Comprehensive error handling with detailed logging
 - **Performance Optimization**: Intelligent processing with time/accuracy balance
+
+## 📸 Screenshots
+
+### Web Interface
+![Main Interface](screenshots/1.png)
+*User-friendly web interface for uploading vehicle images*
+
+### Processing Results
+![Detection Results](screenshots/2.png)
+*License plate detection with confidence scoring and detailed processing information*
+
+### Multiple Detection Examples
+![Sample Detection](screenshots/3.png)
+*Example of successful license plate recognition on various vehicle types*
+
+## 🎯 Quick Demo
+
+1. **Upload**: Select an image containing a vehicle with a visible license plate
+2. **Process**: The system automatically detects and extracts the license plate text
+3. **Results**: View the recognized license plate number with confidence level and processing details
+
+The system works with various vehicle types and license plate formats, providing reliable recognition even in challenging conditions.
 
 ## Features
 
@@ -58,18 +97,32 @@ The system consists of several key components:
 
 1. **Clone or download the project**:
    ```bash
-   cd path/to/your/project
+   git clone https://github.com/shakiliitju/Car-Number-Plate-Recognition-System.git
+   cd Car-Number-Plate-Recognition-System
    ```
 
-2. **Install Python dependencies**:
+2. **Create a virtual environment** (recommended):
+   ```bash
+   python -m venv venv
+   
+   # Windows
+   venv\Scripts\activate
+   
+   # Linux/macOS
+   source venv/bin/activate
+   ```
+
+3. **Install Python dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Verify Tesseract installation**:
+4. **Verify Tesseract installation**:
    ```bash
    tesseract --version
    ```
+
+   **Note**: If you encounter "tesseract not found" error on Windows, you may need to add Tesseract to your system PATH or update the `app.py` file with the correct Tesseract executable path.
 
 ## Usage
 
@@ -97,6 +150,10 @@ The system consists of several key components:
 - PNG, JPG, JPEG, GIF, BMP, TIFF
 - Maximum file size: 16MB
 - Recommended: Clear images with visible license plates
+
+### Test Images
+
+The project includes a comprehensive set of test images in the `test images/` folder with various vehicle types and license plate formats. These images can be used to test the system's accuracy and performance across different scenarios.
 
 ## Technical Details
 
@@ -182,11 +239,36 @@ This ACNPR system can be used in various scenarios:
 
 ## Dependencies
 
+### Core Libraries
 - **Flask**: Web framework for the user interface
-- **OpenCV**: Computer vision library for image processing
-- **Pytesseract**: Python wrapper for Tesseract OCR
-- **NumPy**: Numerical computing library
-- **Pillow**: Python Imaging Library for image handling
+- **OpenCV (cv2)**: Computer vision library for image processing
+- **Pytesseract**: Python wrapper for Tesseract OCR engine
+- **NumPy**: Numerical computing library for array operations
+- **Pillow (PIL)**: Python Imaging Library for image handling
+
+### External Requirements
+- **Tesseract OCR**: External OCR engine (must be installed separately)
+
+### File Structure
+```
+Car-Number-Plate-Recognition-System/
+├── app.py                 # Main Flask application
+├── requirements.txt       # Python dependencies
+├── README.md             # Project documentation
+├── LICENSE               # License file
+├── static/               # CSS and JavaScript files
+│   ├── style.css
+│   └── script.js
+├── templates/            # HTML templates
+│   └── index.html
+├── screenshots/          # Demo screenshots
+│   ├── 1.png
+│   ├── 2.png
+│   └── 3.png
+├── test images/          # Sample test images
+│   └── [Various car images]
+└── uploads/              # Temporary upload directory
+```
 
 ## License
 
