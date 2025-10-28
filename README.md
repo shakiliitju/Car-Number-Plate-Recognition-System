@@ -1,4 +1,4 @@
-# Automatic Car Number Plate Recognition (ACNPR) System - Enhanced Version
+# Automatic Car Number Plate Recognition System
 
 An **advanced, high-accuracy** image processing system that uses computer vision and OCR (Optical Character Recognition) to automatically detect and recognize vehicle license plates from images with improved accuracy and robustness.
 
@@ -228,6 +228,39 @@ This ACNPR system can be used in various scenarios:
 - Ensure license plates are not tilted or skewed
 - Clean license plates work better than dirty or damaged ones
 - Higher resolution images generally provide better results
+
+## 🧰 Debugging & Saved Uploads
+
+When you upload an image the application saves a small set of debugging artifacts to help diagnose detection and OCR issues. This makes it much easier to inspect what the pipeline actually saw when Tesseract produced a wrong result.
+
+- Location: `uploads/` (a new session folder is created for each upload)
+- Folder naming: `Car Number-1`, `Car Number-2`, ... (sequential). If folder creation fails the app falls back to a UUID-named folder.
+
+Files saved per session (summary):
+- The original uploaded image (same filename you uploaded)
+- `plate.png` — cropped plate region detected by the pipeline (if any)
+- Detection images:
+   - `sobel_combined.png` — combined Sobel edge map used for detection
+   - `candidates_annotated.png` — annotated image showing all detection candidates and scores
+   - `candidate_best_<score>.png` — cropped image of the top-scoring candidate
+- Preprocessing images (one file each):
+   - `bilateral.png`
+   - `inverted.png`
+   - `simple_otsu.png`
+   - `morphological.png`
+
+Notes:
+- The system intentionally does NOT save OCR text output files (no `.txt` files are stored) to reduce persisted sensitive text.
+- If a particular preprocessing method didn't produce a usable image it will be omitted from the session folder.
+
+How to change or disable saving
+- To change the uploads root folder, edit `app.config['UPLOAD_FOLDER']` in `app.py`.
+- To stop saving debug artifacts, remove or comment out the lines in `app.py` that set `recognizer.debug_dir = session_dir` and the image-write sections inside the recognizer methods. The code is centralized so this is quick to toggle.
+- If you prefer UUID folders instead of sequential `Car Number-N` folders, change the upload handler to use `uuid.uuid4().hex` for folder names (the code already falls back to this on error).
+
+Privacy and cleanup
+- The `uploads/` folder can grow over time. Periodically remove old `Car Number-*` folders or add a small cleanup script to keep recent N sessions.
+- Avoid storing images from production with sensitive personal data for longer than necessary; implement a retention policy if deploying this system in production.
 
 ## Future Enhancements
 
